@@ -7,13 +7,7 @@ import java.util.Map;
 public class Task18 {
     public static void main(String[] args) {
         //Посчитать сумма ключей и значений в HashMap
-//        Map<Integer,List<Integer>>map = new HashMap<>();
-//        map.put(1,List.of(1,2,3));
-//        map.put(2,List.of(1,2,3));
-//        map.put(3,List.of(1,2,3));
-//
-//        int sumKey = 0;
-//        int sumVaalue =0;
+
 
 
         var map = Map.of(
@@ -23,7 +17,7 @@ public class Task18 {
 
         var sum = map.entrySet()
                 .stream()
-                .mapToInt(x -> x.getKey() + x.getValue().stream()
+                .mapToInt(entry -> entry.getKey() + entry.getValue().stream()
                         .mapToInt(Integer::intValue)
                         .sum())
         .sum();

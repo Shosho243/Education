@@ -1,5 +1,9 @@
 package Zada4ki;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Task26 {
     public static void main(String[] agrs) {
         //Написать метод , который принимает на вход строку и ищет в ней самую длинную подстроку
@@ -27,8 +31,34 @@ public class Task26 {
 
 
         //2 способ с помощью метода
-        String input = "1551117770000000000009";
+        var input = "1551117770000000000009";
+        System.out.println(subString(input));
 
     }
-    private static
+
+    private static String subString(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("String can't be null or empty");
+        }
+        if (input.length() == 1) {
+            return input;
+        }
+        var chars = input.toCharArray();
+        var map = new LinkedHashMap<Character, Integer>();
+        for (var temp : chars) {
+            map.compute(temp, (_, oldValue) -> oldValue == null ? 1 : oldValue + 1);
+        }
+
+        return map.entrySet().stream()
+                .max(Comparator.comparingInt(Map.Entry::getValue))
+                .map(entry -> {
+                    var stringBuilder = new StringBuilder();
+                    var currentChar = entry.getKey();
+                    stringBuilder.append(
+                            String.valueOf(currentChar)
+                    .repeat(Math.max(0, entry.getValue()))
+                    );
+                    return stringBuilder.toString();
+                }).orElseThrow(IllegalArgumentException::new );
+    }
 }

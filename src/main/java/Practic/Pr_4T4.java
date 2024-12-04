@@ -1,37 +1,42 @@
 package Practic;
 
-public class Pr_4T4 {//написать программу которая проверяет , является ли одно слово анаграммой другого
+import java.util.Arrays;
 
+public class Pr_4T4 {
+    //написать программу которая проверяет , является ли одно слово анаграммой другого
     // на вход подается 2 строки . На выходе true или false
     // канонада, анаконда - true
     // стол,стул - false
     public static void main(String[] args) {
-        String origin = "канонада";
-        String anagram = "анаконда";
-        System.out.println(isAnagram(origin, anagram));
+        String word1 = "стол";
+        String word2 = "стул";
+        System.out.println(isAnagrama(word1, word2));
     }
 
-    public static boolean isAnagram(String origin, String anagram) {
-        if (origin.length() != anagram.length()) {
+    public static boolean isAnagrama(String word1, String word2) {
+        if (word1.length() != word2.length()) {
             return false;
         }
-        char[] oroginChars = origin.toCharArray();
-        char[] anagramChars = anagram.toCharArray();
-        boolean[] markers = new boolean[anagramChars.length];
-        for (char temp : oroginChars) {
-            for (int i = 0; i < anagramChars.length; i++) {
-                if (temp == anagramChars[i]) {
+        var chars1 = word1.toCharArray();
+        var chars2 = word2.toCharArray();
+        boolean[] markers = new boolean[chars2.length];
+        for (char temp : chars1) {
+            for (int i = 0; i < chars2.length; i++) {
+                if (temp == chars2[i]) {
                     if (!markers[i]) {
                         markers[i] = true;
                         break;
                     }
-                }if(i==anagramChars.length-1){
+                }
+                if (i == chars2.length - 1) {
                     return false;
                 }
             }
         }
-    return true;}
+        return true;
+    }
 }
+
 
 
 
